@@ -40,7 +40,7 @@ php main.php
 
 复制 Cookie: 后面的内容，粘贴到 cookie.txt 里。
 
-然后编辑 main.php，把自动签到想说的话改一下，避免大量重复的签到语...容易引起怀疑
+然后编辑 config.php，根据自己的情况进行设置，里面有说明。
 
 再次运行 main.php 即可开始自动签到。
 ````bash
