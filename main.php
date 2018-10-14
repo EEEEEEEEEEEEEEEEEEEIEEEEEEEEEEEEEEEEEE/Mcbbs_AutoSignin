@@ -121,6 +121,11 @@ while(true) {
 					$ZeroDream->sendMail($adminmail, "MCBBS 签到成功", "<p>ZeroDream MCBBS 签到助手已帮您完成签到啦~</p><p>以下是签到后服务器返回的内容：{$data}</p><p><i>MCBBS 签到助手 by Akkariin</i></p>");
 				}
 				$retry = false;
+			} elseif(mb_stristr($resu, "已经")) {
+				$data = mb_substr($data, 0, mb_stripos($data, "<script"));
+				$ZeroDream->Println("签到失败！服务器返回：{$data}，原始数据：{$resu}");
+				$ZeroDream->Println("由于已经签到或手动签到，本次任务取消，等待明天继续执行。");
+				$retry = false;
 			} else {
 				$data = mb_substr($data, 0, mb_stripos($data, "<script"));
 				$ZeroDream->Println("签到失败！服务器返回：{$data}，原始数据：{$resu}");
