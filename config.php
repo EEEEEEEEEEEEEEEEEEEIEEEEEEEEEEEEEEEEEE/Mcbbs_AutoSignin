@@ -4,6 +4,9 @@
  *	ZeroDream MCBBS 助手设置
  *
  */
+
+// 是否启用邮件提醒功能，（true 是 false 否）
+$enable_mail = true;
  
 // SMTP 服务器地址，例如 smtp.tcotp.cn
 $smtpserver = "smtp.tcotp.cn";

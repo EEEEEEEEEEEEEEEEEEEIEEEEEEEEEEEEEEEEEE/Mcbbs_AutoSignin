@@ -115,17 +115,21 @@ while(true) {
 			$data = mb_substr($data, 0, mb_stripos($data, "<script"));
 			if(mb_stristr($data, "成功")) {
 				$ZeroDream->Println("签到成功！服务器返回：{$data}");
-				$ZeroDream->sendMail($adminmail, "MCBBS 签到成功", "<p>ZeroDream MCBBS 签到助手已帮您完成签到啦~</p><p>以下是签到后服务器返回的内容：{$data}</p><p><i>MCBBS 签到助手 by Akkariin</i></p>");
+				if($enable_mail) {
+					$ZeroDream->sendMail($adminmail, "MCBBS 签到成功", "<p>ZeroDream MCBBS 签到助手已帮您完成签到啦~</p><p>以下是签到后服务器返回的内容：{$data}</p><p><i>MCBBS 签到助手 by Akkariin</i></p>");
+				}
 				$retry = false;
 			} else {
 				$ZeroDream->Println("签到失败！服务器返回：{$data}，原始数据：{$resu}");
 				$ZeroDream->Println("系统将在稍后重新尝试签到！");
-				$ZeroDream->sendMail($adminmail, "MCBBS 签到出错", "<p>ZeroDream MCBBS 签到助手在签到时发生了一些错误！</p>
-					<p>以下是签到后服务器返回的内容：{$data}</p>
-					<p>您无需担心，系统会在稍后再次尝试签到。</p>
-					<p>原始数据：</p>
-					<pre>" . htmlspecialchars($resu) . "</pre>
-					<p><i>MCBBS 签到助手 by Akkariin</i></p>");
+				if($enable_mail) {
+					$ZeroDream->sendMail($adminmail, "MCBBS 签到出错", "<p>ZeroDream MCBBS 签到助手在签到时发生了一些错误！</p>
+						<p>以下是签到后服务器返回的内容：{$data}</p>
+						<p>您无需担心，系统会在稍后再次尝试签到。</p>
+						<p>原始数据：</p>
+						<pre>" . htmlspecialchars($resu) . "</pre>
+						<p><i>MCBBS 签到助手 by Akkariin</i></p>");
+				}
 				$retry = true;
 			}
 		}
