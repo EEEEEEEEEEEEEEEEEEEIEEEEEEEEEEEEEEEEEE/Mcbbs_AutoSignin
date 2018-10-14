@@ -112,14 +112,17 @@ while(true) {
 			);
 			$resu = $ZeroDream->http("http://www.mcbbs.net/plugin.php?id=dc_signin:sign&inajax=1", $post, $cookie, false, 'http://www.mcbbs.net/plugin.php?id=dc_signin');
 			$data = simplexml_load_string($resu);
-			$data = mb_substr($data, 0, mb_stripos($data, "<script"));
-			if(mb_stristr($data, "成功")) {
+			if(mb_stristr($resu, "成功")) {
+				$data = mb_substr($resu, mb_stripos($resu, "签到成功"), mb_stripos($resu, "', {});}</script>"));
+				$data = explode("'", $data);
+				$data = $data[0];
 				$ZeroDream->Println("签到成功！服务器返回：{$data}");
 				if($enable_mail) {
 					$ZeroDream->sendMail($adminmail, "MCBBS 签到成功", "<p>ZeroDream MCBBS 签到助手已帮您完成签到啦~</p><p>以下是签到后服务器返回的内容：{$data}</p><p><i>MCBBS 签到助手 by Akkariin</i></p>");
 				}
 				$retry = false;
 			} else {
+				$data = mb_substr($data, 0, mb_stripos($data, "<script"));
 				$ZeroDream->Println("签到失败！服务器返回：{$data}，原始数据：{$resu}");
 				$ZeroDream->Println("系统将在稍后重新尝试签到！");
 				if($enable_mail) {
