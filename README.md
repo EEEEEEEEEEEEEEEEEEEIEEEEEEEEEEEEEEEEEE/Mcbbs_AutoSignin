@@ -15,8 +15,7 @@ https://windows.php.net/downloads/releases/php-7.2.11-Win32-VC15-x86.zip
 https://windows.php.net/downloads/releases/php-7.2.11-Win32-VC15-x64.zip
 # 其他系统自行百度吧...尽我所能教这么多了
 ````
-
-## 在 Linux 下签到会失败，不知道什么原因，Windows 下没有问题...懒得修了
+建议使用 Linux 服务器运行，不需要很高配置，1 核 1G 足够。
 
 ### 食用方法
 将项目 clone 到本地（你也可以使用网页上的 Download 功能）
