@@ -21,7 +21,7 @@ class ZeroDream {
 			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($post));
 		}
 		if ($cookie) {
-			curl_setopt($curl, CURLOPT_COOKIE, $cookie);
+			curl_setopt($curl, CURLOPT_COOKIE, str_replace("\n", "", $cookie));
 		}
 		curl_setopt($curl, CURLOPT_HEADER, $returnCookie);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 5);
@@ -57,7 +57,9 @@ class ZeroDream {
 				'签到有积分真好'
 			);
 		}
-		return $text[mt_rand(0, count($text) - 1)];
+		$text = $text[mt_rand(0, count($text) - 1)];
+		$text = $text == "" ? "ZeroDream" : $text;
+		return $text;
 	}
 	
 	public function sendMail($mailto, $mailsub, $mailbd) {
